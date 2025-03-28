@@ -4,6 +4,7 @@ using namespace std;
 
 int alphabet_count[26][200001];
 int alphabet_temp[26];
+int alphabet_number[26];
 
 int alphabet_sub(char c, int begin, int end){
     int idx = c - 97;
@@ -12,7 +13,10 @@ int alphabet_sub(char c, int begin, int end){
 
 int main(){
 
-    int N, idx, cnt = 1, begin, end;
+    cin.tie(0);
+    ios::sync_with_stdio(false);
+
+    int N, idx, begin, end;
     char target;
     string str;
 
@@ -20,8 +24,16 @@ int main(){
 
     for(int i = 0; i < str.length(); i++){
         idx = str[i] - 97;
-        for(int j = i; j < str.length(); j++){
-            alphabet_count[idx][j + 1]++;
+        for(int j = alphabet_temp[idx]; j < i; j++){
+            alphabet_count[idx][j + 1] = alphabet_number[idx];
+        }
+        alphabet_number[idx]++;
+        alphabet_temp[idx] = i;
+    }
+
+    for(int i = 0; i < 26; i++){
+        for(int j = alphabet_temp[i]; j < str.length(); j++){
+            alphabet_count[i][j + 1] = alphabet_number[i];
         }
     }
 
