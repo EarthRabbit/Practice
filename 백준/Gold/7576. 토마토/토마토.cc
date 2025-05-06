@@ -1,7 +1,5 @@
 #include <iostream>
 #include <queue>
-#include <cstring>
-#include <vector>
 using namespace std;
 
 int M, N, row, col, cnt, x, y;
