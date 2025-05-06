@@ -52,7 +52,6 @@ void bfs(int r, int c){
 int main() {
 
     cin >> N;
-    memset(A, -1, sizeof(A));
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
             cin >> c;
