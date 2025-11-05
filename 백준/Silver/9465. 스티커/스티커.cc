@@ -2,20 +2,15 @@
 using namespace std;
 
 int n;
+int d[2][100002];
 
-void dp(vector<int> &A, vector<int> &B){
-    vector<int> C(n + 1);
-    vector<int> D(n + 1);
-
-    C[0] = 0, C[1] = A[1];
-    D[0] = 0, D[1] = B[1];
-
+void dp(){
     for(int i = 2; i <= n; i++){
-        C[i] = max(max(D[i - 1], C[i - 2]) + A[i], C[i - 1]);
-        D[i] = max(max(C[i - 1], D[i - 2]) + B[i], D[i - 1]);
+        d[0][i] = max(max(d[1][i - 1], d[0][i - 2]) + d[0][i], d[0][i - 1]);
+        d[1][i] = max(max(d[0][i - 1], d[1][i - 2]) + d[1][i], d[1][i - 1]);
     }
 
-    cout << max(C[n], D[n]) << '\n';
+    cout << max(d[0][n], d[1][n]) << '\n';
 }
 
 int main(){
@@ -29,15 +24,12 @@ int main(){
 
     for(int i = 0; i < T; i++){
         cin >> n;
-        vector<int> A(n + 1);
-        vector<int> B(n + 1);
-        for(int j = 1; j <= n; j++){
-            cin >> A[j];
+        for(int j = 0; j < 2; j++){
+            for(int k = 1; k <= n; k++){
+                cin >> d[j][k];
+            }
         }
-        for(int j = 1; j <= n; j++){
-            cin >> B[j];
-        }
-        dp(A, B);
+        dp();
     }
 
     return 0;
